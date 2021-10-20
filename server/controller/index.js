@@ -1,0 +1,1 @@
+export { default as regiaterController } from './auth/registerController';
