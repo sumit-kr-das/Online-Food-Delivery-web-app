@@ -1,0 +1,10 @@
+/* nav active */
+a{
+    color: #000;
+}
+.activei{
+    background-image: linear-gradient(90deg, #7040ff 30%, #5a33ff 70%);
+    color: #fff;
+    box-shadow: 0 4px 4px rgba(0,0,0,0.2);
+    border-radius: 25px;
+}

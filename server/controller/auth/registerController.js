@@ -1,17 +1,18 @@
 // * CHECKLIST
 // ! [.] validate the request (joi)
-// ! [ ] authorise the request
-// ! [ ] check if user is in the database already
-// ! [ ] prepare model
-// ! [ ] store in database
-// ! [ ] generate jwt token
-// ! [ ] send response
+// ! [.] authorise the request
+// ! [.] check if user is in the database already
+// ! [.] prepare model
+// ! [.] store in database
+// ! [.] generate jwt token
+// ! [.] send response
 
 import Joi from 'joi';
 import CustomErrorHandler from '../../services/custiomErrorHandler';
-import { User } from '../../models';
+import { RefreshToken, User } from '../../models';
 import bcrypt from 'bcrypt';
 import JwtService from '../../services/JwtService';
+import { REFRESH_SECRET } from '../../config';
 
 const registercontroller = {
   async register(req, res, next) {
@@ -53,17 +54,20 @@ const registercontroller = {
         password: hashedPassword
     });
     let access_token;
+    let refresh_token;
     try{
         const result = await user.save();
 
         //token
         access_token = JwtService.sign({ _id: result._id, role: result.role });
-
+        refresh_token = JwtService.sign({ _id: result._id, role: result.role }, '1y', REFRESH_SECRET );
+        //database whitelist
+        await RefreshToken.create({ token: refresh_token });
     }catch(err){
         return next(err);
     }
 
-    res.json({ access_token: access_token });
+    res.json({ access_token: access_token, refresh_token: refresh_token  });
   },
 };
 
