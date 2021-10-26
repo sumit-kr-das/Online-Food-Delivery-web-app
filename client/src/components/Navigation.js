@@ -1,8 +1,12 @@
-import React, {useState} from 'react';
-import { AppBar, Toolbar, Box, makeStyles, Drawer, List ,  ListItem, ListItemText, IconButton, } from '@material-ui/core';
+import React, {useState, useContext} from 'react';
+import { AppBar, Toolbar, Box, makeStyles, Drawer, List ,  ListItem, ListItemText, IconButton } from '@material-ui/core';
+import Badge from '@material-ui/core/Badge';
+import { withStyles } from '@material-ui/core/styles';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import { NavLink } from 'react-router-dom';
 import MenuIcon from "@material-ui/icons/Menu";
+
+import { cartContext } from '../CartContext';
 
 
 const useStyles = makeStyles(theme=>({
@@ -65,9 +69,21 @@ const useStyles = makeStyles(theme=>({
     }
 }));
 
+const StyledBadge = withStyles((theme) => ({
+    badge: {
+      right: 30,
+      top: -10,
+      border: `2px solid ${theme.palette.background.paper}`,
+      padding: '0 4px',
+    },
+}))(Badge);
+
 const Navigation = () =>{
     const classes = useStyles();
     const [open, setOpen] = useState(false);
+
+    const { cart } = useContext(cartContext);
+
     return(
         <>
             <Drawer open={open} onClose={() => setOpen(false)}>
@@ -76,7 +92,7 @@ const Navigation = () =>{
                         <li><NavLink to="/" activeClassName="activei">Home</NavLink></li>
                         <li><NavLink to="/about" activeClassName="activei">About us</NavLink></li>
                         <li><NavLink to="/products" activeClassName="activei">Products</NavLink></li>
-                        <li className={classes.cart}><NavLink to="/cart" activeClassName="activei" style={{display: "flex", alignItems: "center", color: "#fff"}} ><AddShoppingCartIcon/> Cart</NavLink></li>
+                        <li className={classes.cart}><NavLink to="/cart" activeClassName="activei" style={{display: "flex", alignItems: "center", color: "#fff"}} ><StyledBadge badgeContent={cart.totalItems ? cart.totalItems : 0} color="secondary"><AddShoppingCartIcon/></StyledBadge> Cart</NavLink></li>
                     </ul>
                 </List>
             </Drawer>
@@ -98,7 +114,14 @@ const Navigation = () =>{
                             <li><NavLink to="/" activeClassName="activei">Home</NavLink></li>
                             <li><NavLink to="/about" activeClassName="activei">About us</NavLink></li>
                             <li><NavLink to="/products" activeClassName="activei">Products</NavLink></li>
-                            <li className={classes.cart}><NavLink to="/cart" activeClassName="activei" style={{display: "flex", alignItems: "center", color: "#fff"}} ><AddShoppingCartIcon/> Cart</NavLink></li>
+                            <li className={classes.cart}>
+                                <NavLink to="/cart" activeClassName="activei" style={{display: "flex", alignItems: "center", color: "#fff"}} >
+                                    <StyledBadge badgeContent={cart.totalItems ? cart.totalItems : 0} color="secondary">
+                                        <AddShoppingCartIcon/>
+                                    </StyledBadge>
+                                     Cart
+                                </NavLink>
+                            </li>
                         </ul>
                     </Box>
                 </Toolbar>

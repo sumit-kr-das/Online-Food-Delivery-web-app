@@ -1,9 +1,14 @@
+import { Box, Grow } from '@material-ui/core';
 import React from 'react';
-
+import Product from './Home/Products';
 
 const Products = () =>{
     return(
-        <h1>This is Products page</h1>
+        <Box style={{marginTop: "8rem"}}>
+            <Grow in>
+                <Product/>
+            </Grow>
+        </Box>
     )
 }
 
