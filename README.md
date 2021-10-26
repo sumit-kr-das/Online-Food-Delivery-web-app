@@ -54,7 +54,7 @@ git push
 **1.** Navigate to the project directory.
 
 ```bash
-cd secure-login-system
+cd Online-Food-Delivery-web-app
 ```
 
 **2.** Navigate to the Client directory.
@@ -70,21 +70,14 @@ npm start / yarn start
 ```bash
 cd server
 npm install
-npm start 
+npm run dev 
 ```
 
-## ecommerce-rest-apis-node
-
-#### Install Dependancies
-After cloning/downloading the source code, change directory to project folder ( project root folder ). 
-Run following command: 
-`npm install`
-
-This command will install all the required dependancies.
+## server (rest-apis-node)
 
 #### Setup Environment
 Create a new file called `.env`. 
-Copy all the content from `.env.example.txt` and paste it into `.env`
+Copy all the content from `env.example.txt` and paste it into `.env`
 Change DB_URL to yours db url. 
 
 #### Run the server
