@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, makeStyles, Container } from '@material-ui/core';
 import Header from './Header';
 import Products from './Products';
+import Footer from '../Footer';
 
 const useStyles = makeStyles(theme=>({
     container: {
@@ -16,6 +17,7 @@ const Home = () =>{
         <Box className={classes.container}>
             <Header/>
             <Products/>
+            <Footer/>
         </Box>
     )
 }

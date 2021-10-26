@@ -1,6 +1,7 @@
 import { Box, Grow } from '@material-ui/core';
 import React from 'react';
 import Product from './Home/Products';
+import Footer from './Footer';
 
 const Products = () =>{
     return(
@@ -8,6 +9,7 @@ const Products = () =>{
             <Grow in>
                 <Product/>
             </Grow>
+            <Footer/>
         </Box>
     )
 }
